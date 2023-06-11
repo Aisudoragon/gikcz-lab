@@ -152,17 +152,26 @@ public class Renderer {
         return new Vec3f(x, y, z);
     }
 
-    public void drawTriangle(Vec2f A, Vec2f B, Vec2f C) {
+    public void drawTriangle(Vec2f A, Vec2f B, Vec2f C, Vec3i color) {
         // dla każdego punktu obrazu this.render:
         //      oblicz współrzędne baryc.
         //      jeśli punkt leży wewnątrz, zamaluj (patrz wykład)
+
+        if (color.x < 0) color.x = 0;
+        if (color.x > 255) color.x = 255;
+        if (color.y < 0) color.x = 0;
+        if (color.y > 255) color.x = 255;
+        if (color.z < 0) color.x = 0;
+        if (color.z > 255) color.x = 255;
+
+        int kolor = color.z | (color.y << 8) | (color.x << 16) | (255 << 24);
 
         for (int i = 0; i < w; i++) {
             for (int j = 0; j < h; j++) {
                 Vec2f P = new Vec2f(i + 0.5f, j + 0.5f);
                 Vec3f barycentric = barycentric(A, B, C, P);
                 if (barycentric.x > 0 && barycentric.x < 1 && barycentric.y > 0 && barycentric.y < 1 && barycentric.z > 0 && barycentric.z < 1) {
-                    drawPoint(i,j);
+                    render.setRGB(i, j, kolor);
                     //render.setRGB(x,y, );
                 }
             }
