@@ -16,10 +16,11 @@ public class Renderer {
     public final int w = 200;
 
     private String filename;
-    private LineAlgo lineAlgo = LineAlgo.NAIVE;
+    private LineAlgo lineAlgo;
 
-    public Renderer(String filename, int width, int height) {
+    public Renderer(String filename, int width, int height, LineAlgo lineAlgo) {
         render = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
+        this.lineAlgo = lineAlgo;
         this.filename = filename;
     }
 
@@ -28,7 +29,7 @@ public class Renderer {
         render.setRGB(x, y, white);
     }
 
-    public void drawLine(int x0, int y0, int x1, int y1, LineAlgo lineAlgo) {
+    public void drawLine(int x0, int y0, int x1, int y1) {
         if(lineAlgo == LineAlgo.NAIVE) drawLineNaive(x0, y0, x1, y1);
         if(lineAlgo == LineAlgo.BRESENHAM) drawLineBresenham(x0, y0, x1, y1);
         if(lineAlgo == LineAlgo.BRESENHAM_INT) drawLineBresenhamInt(x0, y0, x1, y1);
@@ -37,10 +38,10 @@ public class Renderer {
     public void drawLineNaive(int x0, int y0, int x1, int y1) {
         // TODO: zaimplementuj
 
-        int dx = x1 - x0;
-        int dy = y1 - y0;
+        float dx = x1 - x0;
+        float dy = y1 - y0;
         for (int x = x0; x <= x1; x++) {
-            int y = y0 + dy * (x - x0) / dx;
+            int y = Math.round(y0 + dy * (x - x0) / dx);
             drawPoint(x, y);
         }
     }

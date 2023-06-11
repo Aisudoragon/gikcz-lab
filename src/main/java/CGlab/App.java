@@ -10,10 +10,10 @@ public class App {
 
     public static void main(String[] args) {
 
-        Renderer mainRenderer = new Renderer(args[0], Integer.parseInt(args[1]), Integer.parseInt(args[2]));
+        Renderer mainRenderer = new Renderer(args[0], Integer.parseInt(args[1]), Integer.parseInt(args[2]), Renderer.LineAlgo.valueOf(args[3]));
         mainRenderer.clear();
         mainRenderer.drawPoint(100, 100);
-        mainRenderer.drawLineNaive(100, 100, 200, 150);
+        mainRenderer.drawLine(100, 100, 200, 150);
         try {
             mainRenderer.save();
         } catch (IOException ex) {
