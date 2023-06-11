@@ -124,4 +124,31 @@ public class Renderer {
         g.dispose();
         return flippedImage;
     }
+
+    public Vec3f barycentric(Vec2f A, Vec2f B, Vec2f C, Vec2f P) {
+        Vec3f v1 = new Vec3f(B.x - A.x, C.x - A.x, P.x - A.x);
+                // tutaj potrzebujemy wektora składającego się ze współrzędnych
+                // x wektorów AB, AC ora PA.
+
+        Vec3f v2 = new Vec3f(B.y - A.y, C.y - A.y, P.y - A.y);
+                // tutaj potrzebujemy wektora składającego się ze współrzędnych
+                // y wektorów AB, AC ora PA.
+
+        Vec3f cross = cross(v1, v2);
+                // iloczyn wektorowy v1 i v2. Wskazówka: zaimplementuj do tego oddzielną metodę
+
+        Vec2f uv = new Vec2f(cross.x / cross.z, cross.y / cross.z);
+                // wektor postaci: cross.x / cross.z, cross.y / cross.z
+
+        return new Vec3f(uv.x, uv.y, 1 - uv.x - uv.y);
+            // współrzędne barycentryczne, uv.x, uv.y, 1- uv.x - uv.y
+    }
+
+    public static Vec3f cross(Vec3f A, Vec3f B) {
+        float x, y, z;
+        x = (A.y * B.z) - (A.z * B.y);
+        y = (A.z * B.x) - (A.x * B.z);
+        z = (A.x * B.y) - (A.y * B.x);
+        return new Vec3f(x, y, z);
+    }
 }
