@@ -13,7 +13,14 @@ public class App {
         Renderer mainRenderer = new Renderer(args[0], Integer.parseInt(args[1]), Integer.parseInt(args[2]), Renderer.LineAlgo.valueOf(args[3]));
         mainRenderer.clear();
         mainRenderer.drawPoint(100, 100);
-        mainRenderer.drawLine(100, 100, 200, 150);
+        mainRenderer.drawLine(296, 164, 332, 61);
+        mainRenderer.drawLine(424, 275, 399, 186);
+        mainRenderer.drawLine(407, 378, 323, 351);
+        mainRenderer.drawLine(591, 208, 469, 235);
+        mainRenderer.drawLine(107, 304, 78, 412);
+        mainRenderer.drawLine(513, 48, 551, 159);
+        mainRenderer.drawLine(494, 279, 591, 296);
+        mainRenderer.drawLine(32, 110, 113, 93);
         try {
             mainRenderer.save();
         } catch (IOException ex) {
