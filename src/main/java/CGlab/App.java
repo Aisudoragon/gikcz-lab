@@ -21,6 +21,13 @@ public class App {
         mainRenderer.drawLine(513, 48, 551, 159);
         mainRenderer.drawLine(494, 279, 591, 296);
         mainRenderer.drawLine(32, 110, 113, 93);
+
+        Vec2f A = new Vec2f(1, 1);
+        Vec2f B = new Vec2f(100, 55);
+        Vec2f C = new Vec2f(55, 100);
+
+        mainRenderer.drawTriangle(A, B, C);
+
         try {
             mainRenderer.save();
         } catch (IOException ex) {

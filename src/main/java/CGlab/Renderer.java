@@ -126,11 +126,11 @@ public class Renderer {
     }
 
     public Vec3f barycentric(Vec2f A, Vec2f B, Vec2f C, Vec2f P) {
-        Vec3f v1 = new Vec3f(B.x - A.x, C.x - A.x, P.x - A.x);
+        Vec3f v1 = new Vec3f(B.x - A.x, C.x - A.x, A.x - P.x);
                 // tutaj potrzebujemy wektora składającego się ze współrzędnych
                 // x wektorów AB, AC ora PA.
 
-        Vec3f v2 = new Vec3f(B.y - A.y, C.y - A.y, P.y - A.y);
+        Vec3f v2 = new Vec3f(B.y - A.y, C.y - A.y, A.y - P.y);
                 // tutaj potrzebujemy wektora składającego się ze współrzędnych
                 // y wektorów AB, AC ora PA.
 
@@ -146,9 +146,26 @@ public class Renderer {
 
     public static Vec3f cross(Vec3f A, Vec3f B) {
         float x, y, z;
-        x = (A.y * B.z) - (A.z * B.y);
+        x = (A.y * B.z) - (A.z * B.x);
         y = (A.z * B.x) - (A.x * B.z);
         z = (A.x * B.y) - (A.y * B.x);
         return new Vec3f(x, y, z);
+    }
+
+    public void drawTriangle(Vec2f A, Vec2f B, Vec2f C) {
+        // dla każdego punktu obrazu this.render:
+        //      oblicz współrzędne baryc.
+        //      jeśli punkt leży wewnątrz, zamaluj (patrz wykład)
+
+        for (int i = 0; i < w; i++) {
+            for (int j = 0; j < h; j++) {
+                Vec2f P = new Vec2f(i + 0.5f, j + 0.5f);
+                Vec3f barycentric = barycentric(A, B, C, P);
+                if (barycentric.x > 0 && barycentric.x < 1 && barycentric.y > 0 && barycentric.y < 1 && barycentric.z > 0 && barycentric.z < 1) {
+                    drawPoint(i,j);
+                    //render.setRGB(x,y, );
+                }
+            }
+        }
     }
 }
