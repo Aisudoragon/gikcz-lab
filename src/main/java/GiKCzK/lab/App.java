@@ -44,6 +44,10 @@ public class App {
 
         img.setRGB(width / 2, height / 2, p);
 
+        // Wykonanie metody allWhite
+
+        allWhite(img);
+
 // zapis obrazu
         try {
             f = new File("img/modified.png");
@@ -55,8 +59,26 @@ public class App {
 
     public static void allWhite(BufferedImage img) {
         // TODO: zaimplementuj
-        ;
+        int wysokosc = img.getHeight();
+        int szerokosc = img.getWidth();
 
+        for (int i = 0; i < szerokosc; i++) {
+            for (int j = 0; j < wysokosc; j++) {
+                int a = 255;
+                int r = 255;
+                int g = 255;
+                int b = 255;
+                int p = (a << 24) | (r << 16) | (g << 8) | b;
+                img.setRGB(i, j, p);
+            }
+        }
+
+        try {
+            File f = new File("img/allWhite.png");
+            ImageIO.write(img, "png", f);
+        } catch (IOException e) {
+            System.out.println(e);
+        }
     }
 
     public static void imgNegative(BufferedImage img) {
