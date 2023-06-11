@@ -166,12 +166,17 @@ public class Renderer {
 
         int kolor = color.z | (color.y << 8) | (color.x << 16) | (255 << 24);
 
-        for (int i = 0; i < w; i++) {
-            for (int j = 0; j < h; j++) {
-                Vec2f P = new Vec2f(i + 0.5f, j + 0.5f);
+        int minW = (int) Math.min(A.x, Math.min(B.x, C.x));
+        int minH = (int) Math.min(A.y, Math.min(B.y, C.y));
+        int maxW = (int) Math.max(A.x, Math.max(B.x, C.x));
+        int maxH = (int) Math.max(A.x, Math.max(B.x, C.x));
+
+        for (int h = minH; h < maxH; h++) {
+            for (int w = minW; w < maxW; w++) {
+                Vec2f P = new Vec2f(w + 0.5f, h + 0.5f);
                 Vec3f barycentric = barycentric(A, B, C, P);
                 if (barycentric.x > 0 && barycentric.x < 1 && barycentric.y > 0 && barycentric.y < 1 && barycentric.z > 0 && barycentric.z < 1) {
-                    render.setRGB(i, j, kolor);
+                    render.setRGB(w, h, kolor);
                     //render.setRGB(x,y, );
                 }
             }
