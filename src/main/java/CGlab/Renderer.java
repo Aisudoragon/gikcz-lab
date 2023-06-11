@@ -36,6 +36,13 @@ public class Renderer {
 
     public void drawLineNaive(int x0, int y0, int x1, int y1) {
         // TODO: zaimplementuj
+
+        int dx = x1 - x0;
+        int dy = y1 - y0;
+        for (int x = x0; x <= x1; x++) {
+            int y = y0 + dy * (x - x0) / dx;
+            drawPoint(x, y);
+        }
     }
 
     public void drawLineBresenham(int x0, int y0, int x1, int y1) {
