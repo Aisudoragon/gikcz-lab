@@ -40,6 +40,8 @@ public class App {
 
 // TODO: ustaw ponownie wartości kanałów dla zmiennej p
 
+        p = (a << 24) | (r << 16) | (g << 8) | b;
+
         img.setRGB(width / 2, height / 2, p);
 
 // zapis obrazu
